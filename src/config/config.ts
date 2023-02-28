@@ -2,7 +2,7 @@ import * as dotenv from 'dotenv';
 dotenv.config()
 
 export const HOST = process.env.HOST as string
-export const PORT = process.env.PORT as string
+export const PORT = process.env.PORT as string || 9000
 export const API_URI = process.env.API_URI as string
 export const PAYPAL_API = process.env.PAYPAL_API as string
 export const PAYPAL_API_CLIENT = process.env.PAYPAL_API_CLIENT as string
