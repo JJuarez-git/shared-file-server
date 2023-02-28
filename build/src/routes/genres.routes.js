@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const genres_controller_1 = require("../controllers/genres.controller");
+const router = (0, express_1.Router)();
+router.get("/", genres_controller_1.getAllGenres);
+router.get("/:id", genres_controller_1.getGenreById);
+router.post("/", genres_controller_1.createGenre);
+router.put("/:id", genres_controller_1.updateGenre);
+router.delete("/:id", genres_controller_1.deleteGenre);
+exports.default = router;
