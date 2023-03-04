@@ -23,11 +23,11 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AWS_SECRET_KEY = exports.AWS_PUBLIC_KEY = exports.AWS_BUCKET_REGION = exports.AWS_BUCKET_NAME = exports.WORKSPACE_URL = exports.PAYPAL_API_SECRET = exports.PAYPAL_API_CLIENT = exports.PAYPAL_API = exports.API_URI = exports.PORT = exports.HOST = void 0;
+exports.JWT_SECRET = exports.AWS_SECRET_KEY = exports.AWS_PUBLIC_KEY = exports.AWS_BUCKET_REGION = exports.AWS_BUCKET_NAME = exports.WORKSPACE_URL = exports.PAYPAL_API_SECRET = exports.PAYPAL_API_CLIENT = exports.PAYPAL_API = exports.API_URI = exports.PORT = exports.HOST = void 0;
 const dotenv = __importStar(require("dotenv"));
 dotenv.config();
 exports.HOST = process.env.HOST;
-exports.PORT = process.env.PORT;
+exports.PORT = process.env.PORT || 9000;
 exports.API_URI = process.env.API_URI;
 exports.PAYPAL_API = process.env.PAYPAL_API;
 exports.PAYPAL_API_CLIENT = process.env.PAYPAL_API_CLIENT;
@@ -37,3 +37,4 @@ exports.AWS_BUCKET_NAME = process.env.AWS_BUCKET_NAME;
 exports.AWS_BUCKET_REGION = process.env.AWS_BUCKET_REGION;
 exports.AWS_PUBLIC_KEY = process.env.AWS_PUBLIC_KEY;
 exports.AWS_SECRET_KEY = process.env.AWS_SECRET_KEY;
+exports.JWT_SECRET = process.env.JWT_SECRET;

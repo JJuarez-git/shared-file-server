@@ -41,9 +41,32 @@ const path_1 = __importDefault(require("path"));
 const config_1 = require("../config/config");
 const client_1 = require("@prisma/client");
 const utils_1 = require("../utils/utils");
+const client_s3_1 = require("@aws-sdk/client-s3");
 const prisma = new client_1.PrismaClient();
-const getWorkspace = (req, res) => {
+const getWorkspace = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
+        /* const command = new ListObjectsCommand({
+            Bucket: AWS_BUCKET_NAME,
+            
+        })
+        
+
+ */
+        const command = new client_s3_1.GetObjectCommand({
+            Bucket: config_1.AWS_BUCKET_NAME,
+            Key: 'workspaces/code.png'
+        });
+        /* const com = new GetObjectAttributesCommand({
+            Bucket: AWS_BUCKET_NAME, Key: 'workspaces/code.png', ObjectAttributes: [
+                'ETag',
+                'Checksum',
+                'ObjectParts',
+                'StorageClass',
+                'ObjectSize'
+            ]
+        }) */
+        /* const obj = await AWS_S3.send(command);
+        res.status(200).json(true); */
         const { workspace } = req.params;
         fs.readdir(config_1.WORKSPACE_URL + workspace, (err, files) => {
             if (err) {
@@ -61,14 +84,14 @@ const getWorkspace = (req, res) => {
                     details: fileDetails
                 };
             });
-            res.json(workspace_files);
+            res.status(200).json(workspace_files);
         });
     }
     catch (err) {
         console.error(err.message);
         res.status(500).json({ message: "Something went wrong." });
     }
-};
+});
 exports.getWorkspace = getWorkspace;
 const createFolderIntoWorkspace = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
