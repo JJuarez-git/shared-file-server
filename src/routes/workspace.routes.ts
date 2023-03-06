@@ -8,7 +8,7 @@ import {
 const router = Router();
 
 router.get("/:workspace", verifyToken, getWorkspace);
-router.post("/:workspace", createFolderIntoWorkspace);
-router.delete("/:workspace", deleteFolderFromWorkspace);
+router.post("/:workspace", verifyToken, createFolderIntoWorkspace);
+router.delete("/:workspace", verifyToken, deleteFolderFromWorkspace);
 
 export default router;

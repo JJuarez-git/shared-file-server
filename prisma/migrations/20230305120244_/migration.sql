@@ -1,14 +1,21 @@
-/*
-  Warnings:
+-- CreateTable
+CREATE TABLE "User" (
+    "id" TEXT NOT NULL,
+    "name" TEXT,
+    "username" TEXT NOT NULL,
+    "email" TEXT NOT NULL,
+    "token" TEXT,
 
-  - You are about to drop the `Item` table. If the table is not empty, all the data it contains will be lost.
+    CONSTRAINT "User_pkey" PRIMARY KEY ("id")
+);
 
-*/
--- DropForeignKey
-ALTER TABLE "Item" DROP CONSTRAINT "Item_workspaceId_fkey";
+-- CreateTable
+CREATE TABLE "Workspace" (
+    "id" TEXT NOT NULL,
+    "userId" TEXT NOT NULL,
 
--- DropTable
-DROP TABLE "Item";
+    CONSTRAINT "Workspace_pkey" PRIMARY KEY ("id")
+);
 
 -- CreateTable
 CREATE TABLE "Folder" (
@@ -31,6 +38,18 @@ CREATE TABLE "File" (
 
     CONSTRAINT "File_pkey" PRIMARY KEY ("id")
 );
+
+-- CreateIndex
+CREATE UNIQUE INDEX "User_username_key" ON "User"("username");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Workspace_userId_key" ON "Workspace"("userId");
+
+-- AddForeignKey
+ALTER TABLE "Workspace" ADD CONSTRAINT "Workspace_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Folder" ADD CONSTRAINT "Folder_workspaceId_fkey" FOREIGN KEY ("workspaceId") REFERENCES "Workspace"("id") ON DELETE SET NULL ON UPDATE CASCADE;

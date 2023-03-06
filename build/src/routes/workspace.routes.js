@@ -5,6 +5,6 @@ const utils_1 = require("../utils/utils");
 const workspace_controller_1 = require("../controllers/workspace.controller");
 const router = (0, express_1.Router)();
 router.get("/:workspace", utils_1.verifyToken, workspace_controller_1.getWorkspace);
-router.post("/:workspace", workspace_controller_1.createFolderIntoWorkspace);
-router.delete("/:workspace", workspace_controller_1.deleteFolderFromWorkspace);
+router.post("/:workspace", utils_1.verifyToken, workspace_controller_1.createFolderIntoWorkspace);
+router.delete("/:workspace", utils_1.verifyToken, workspace_controller_1.deleteFolderFromWorkspace);
 exports.default = router;
