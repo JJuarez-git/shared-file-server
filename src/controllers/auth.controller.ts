@@ -1,5 +1,7 @@
 import jwt from 'jsonwebtoken';
-import { JWT_SECRET } from "../config/config";
+import * as fs from 'fs';
+import path from "path";
+import { JWT_SECRET, WORKSPACE_URL } from "../config/config";
 import { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
@@ -64,6 +66,14 @@ export const createUser = async (req: Request, res: Response) => {
             res.status(400).json({ message: 'No email provided.' })
             return;
         }
+        /* const ROUTE = path.resolve(WORKSPACE_URL + '\\' + username);
+        fs.mkdir(ROUTE, (err) => {
+            if (err) {
+                console.error(err.message);
+                res.status(500).json({ message: "Workspace folder can not be created." });
+                return;
+            }
+        }) */
         const result = await prisma.user.create({
             data: { username, email }
         })

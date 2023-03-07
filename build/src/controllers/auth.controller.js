@@ -76,6 +76,14 @@ const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
             res.status(400).json({ message: 'No email provided.' });
             return;
         }
+        /* const ROUTE = path.resolve(WORKSPACE_URL + '\\' + username);
+        fs.mkdir(ROUTE, (err) => {
+            if (err) {
+                console.error(err.message);
+                res.status(500).json({ message: "Workspace folder can not be created." });
+                return;
+            }
+        }) */
         const result = yield prisma.user.create({
             data: { username, email }
         });
